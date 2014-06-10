@@ -19,6 +19,7 @@
 
 #include "format_manager.h"
 
+#include "markdown_reader.h"
 #include "docx_reader.h"
 #include "odt_reader.h"
 #include "rtf_reader.h"
@@ -44,6 +45,10 @@ FormatReader* FormatManager::createReader(QIODevice* device, const QString& type
 	} else if (type == "rtf") {
 		if (RtfReader::canRead(device)) {
 			reader = new RtfReader;
+		}
+	} else if (type == "md") {
+		if (MarkdownReader::canRead(device)) {
+			reader = new MarkdownReader;
 		}
 	}
 
@@ -75,6 +80,8 @@ QString FormatManager::filter(const QString& type)
 		return tr("Rich Text Format") + QLatin1String(" (*.rtf)");
 	} else if ((type == "txt") || (type == "text")) {
 		return tr("Plain Text") + QLatin1String(" (*.txt *.text)");
+	} else if ((type == "md") || (type == "markdown")) {
+		return tr("Markdown") + QLatin1String(" (*.md *.markdown)");
 	} else {
 		return QString();
 	}
@@ -89,6 +96,7 @@ QStringList FormatManager::filters(const QString& type)
 			<< filter("docx")
 			<< filter("rtf")
 			<< filter("txt")
+			<< filter("md")
 			<< (tr("All Files") + QLatin1String(" (*)"));
 
 	QStringList result = default_filters;
@@ -101,9 +109,12 @@ QStringList FormatManager::filters(const QString& type)
 			result.move(3, 0);
 		} else if (type != "odt") {
 			result.move(4, 0);
+		} else if ((type == "md") || (type == "markdown")) {
+			result.move(5, 0);
 		}
+
 	} else {
-		result.prepend(tr("All Supported Files") + QLatin1String(" (*.docx *.odt *.rtf *.txt *.text)"));
+		result.prepend(tr("All Supported Files") + QLatin1String(" (*.docx *.odt *.rtf *.txt *.text *.md *.markdown)"));
 	}
 	return result;
 }
@@ -113,14 +124,14 @@ QStringList FormatManager::filters(const QString& type)
 bool FormatManager::isRichText(const QString& filename)
 {
 	QString type = filename.section(QLatin1Char('.'), -1).toLower();
-	return (type == "odt") || (type == "docx") || (type == "rtf");
+	return (type == "odt") || (type == "docx") || (type == "rtf") || (type == "md");
 }
 
 //-----------------------------------------------------------------------------
 
 QStringList FormatManager::types()
 {
-	return QStringList() << "odt" << "docx" << "rtf" << "txt";
+	return QStringList() << "odt" << "docx" << "rtf" << "txt" << "md";
 }
 
 //-----------------------------------------------------------------------------

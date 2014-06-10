@@ -76,6 +76,12 @@ bool DocumentWriter::write()
 					m_encoding = writer.encoding();
 				}
 				saved = writer.write(&file, m_document);
+			} else if (m_type == "md") {
+				MarkdownWriter writer(m_encoding);
+				if (m_encoding.isEmpty()) {
+					m_encoding = writer.encoding();
+				}
+				saved = writer.write(&file, m_document);
 			} else {
 				QTextStream stream(&file);
 				QByteArray encoding = !m_encoding.isEmpty() ? m_encoding : "UTF-8";
