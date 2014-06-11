@@ -22,6 +22,7 @@
 #include "docx_writer.h"
 #include "odt_writer.h"
 #include "rtf_writer.h"
+#include "markdown_writer.h"
 
 #include <QFile>
 #include <QTextDocument>
@@ -78,9 +79,9 @@ bool DocumentWriter::write()
 				saved = writer.write(&file, m_document);
 			} else if (m_type == "md") {
 				MarkdownWriter writer(m_encoding);
-				if (m_encoding.isEmpty()) {
-					m_encoding = writer.encoding();
-				}
+				//if (m_encoding.isEmpty()) {
+				//	m_encoding = writer.encoding();
+				//}
 				saved = writer.write(&file, m_document);
 			} else {
 				QTextStream stream(&file);

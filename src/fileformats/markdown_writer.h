@@ -34,7 +34,8 @@ class MarkdownWriter
 	Q_DECLARE_TR_FUNCTIONS(MarkdownWriter)
 
 public:
-	MarkdownWriter();
+	// MarkdownWriter();
+	MarkdownWriter(const QByteArray& encoding);
 
 	QString errorString() const
 	{
@@ -42,15 +43,19 @@ public:
 	}
 
 	void setStrict(bool strict);
-	bool write(const QString& filename, QTextDocument* document);
+	bool write(QIODevice* device, QTextDocument* document);
 
 private:
 	// functions declaration here
 
 private:
-	QXmlStreamWriter m_xml;
 	bool m_strict;
+	bool m_supports_ascii;
+	QByteArray m_encoding;
+	QByteArray m_header;
 	QString m_error;
+	QTextCodec* m_codec;
+	QXmlStreamWriter m_xml;
 };
 
 #endif

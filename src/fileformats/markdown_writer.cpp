@@ -28,9 +28,12 @@
 
 //-----------------------------------------------------------------------------
 
-MarkdownWriter::MarkdownWriter() :
-	m_strict(false)
+MarkdownWriter::MarkdownWriter(const QByteArray& encoding) :
+	m_encoding(encoding),
+	m_codec(0),
+	m_supports_ascii(false)
 {
+	// FIXME: do something usefull
 }
 
 //-----------------------------------------------------------------------------
@@ -42,9 +45,9 @@ void MarkdownWriter::setStrict(bool strict)
 
 //-----------------------------------------------------------------------------
 
-bool MarkdownWriter::write(const QString& filename, QTextDocument* document)
+bool MarkdownWriter::write(QIODevice* device, QTextDocument* document)
 {
-	return ;
+	return true;
 }
 
 //-----------------------------------------------------------------------------
