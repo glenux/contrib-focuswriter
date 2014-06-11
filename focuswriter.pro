@@ -215,6 +215,8 @@ SOURCES += src/action_manager.cpp \
 	src/timer_manager.cpp \
 	src/utils.cpp \
 	src/window.cpp \
+	src/fileformats/markdown_reader.cpp \
+	src/fileformats/markdown_writer.cpp \
 	src/fileformats/docx_reader.cpp \
 	src/fileformats/docx_writer.cpp \
 	src/fileformats/format_manager.cpp \
