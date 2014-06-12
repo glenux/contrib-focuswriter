@@ -12,4 +12,5 @@ Reference Markdown integration in app
 ------------------------------------
 
 * https://github.com/cloose/CuteMarkEd
+* https://github.com/eduardonunesp/Anomade.git
 
