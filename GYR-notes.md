@@ -1,6 +1,21 @@
 Various GLENUX notes
 ====================
 
+Implementating Reader
+---------------------
+
+* use RTFReader as an inspiration (it contains everything needed to change bold, italic, etc.)
+* use a markdown library to get the file structure once opened
+* read file structure linearly & transform it to RichText instructions
+
+
+Implementing Writer
+--------------------
+
+* No need for a markdown library there (?)
+* Read RichText sequencially & transform each style into markdown sequence
+
+
 Markdown libraries
 ------------------
 
